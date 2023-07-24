@@ -2,33 +2,95 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.spring.boot.service.dao.BoardMapper">
 
+	<!-- 글 목록 조회 -->
 	<select id="selectListPageBoardSearch" resultType="BoardDto">
 		SELECT /* selectListPageBoardSearch */
-		         BRD_NO
-				,UP_BRD_NO 
-				,WRT_MMBR_NO 
-				,BRD_TITLE 
-				,BRD_CONTENT 
-				,BRD_DT 
-				,BRD_CNT 
-				,BRD_LIKE_CNT 
-				,BRD_DL_YN 
-				,BRD_DL_DT 
-				,DL_MMBR_NO 
-				,REGR_ID 
-				,REGR_DT 
-				,UDTR_ID 
-				,UDTR_DT 
+		         B.BRD_NO
+				,B.UP_BRD_NO 
+				,B.WRT_MMBR_NO 
+				,M.MMBR_NM
+				,B.BRD_TITLE 
+				,B.BRD_CONTENT 
+				,B.BRD_DT 
+				,B.BRD_CNT 
+				,B.BRD_LIKE_CNT 
+				,B.BRD_DL_YN 
+				,B.BRD_DL_DT 
+				,B.DL_MMBR_NO 
+				,B.REGR_ID 
+				,B.REGR_DT 
+				,B.UDTR_ID 
+				,B.UDTR_DT 
 			FROM hjtbd001 B
+			JOIN hjtmb001 M ON B.WRT_MMBR_NO = M.MMBR_NO
 			WHERE B.BRD_DL_YN = 'N'
            
          ORDER BY BRD_NO DESC
 	</select>
 	
+	<!-- 글 등록 -->
 	<insert id="insertBoard">
-		INSERT INTO hjtbd001 (UP_BRD_NO, WRT_MMBR_NO, BRD_TITLE, BRD_CONTENT, BRD_DT, BRD_CNT, BRD_LIKE_CNT, BRD_DL_YN, DL_MMBR_NO, REGR_ID, REGR_DT, UDTR_ID, UDTR_DT)
-		VALUES (0, #{wrtMmbrNo}, #{brdTitle},#{brdContent}, NOW(), 0, 0, 'N', #{dlMmbrNo},'admin', NOW(), 'admin', NOW())
+		INSERT INTO hjtbd001 (
+								WRT_MMBR_NO
+							  , BRD_TITLE
+							  , BRD_CONTENT
+							  , BRD_DT
+							  , BRD_CNT
+							  , BRD_LIKE_CNT
+							  , BRD_DL_YN
+							  , REGR_ID
+							  , REGR_DT
+							  , UDTR_ID
+							  , UDTR_DT)
+				VALUES (
+						#{wrtMmbrNo}
+					  , #{brdTitle}
+					  , #{brdContent}
+					  , NOW()
+					  , 0
+					  , 0
+					  , 'N'
+					  , 'admin'
+					  , NOW()
+					  , 'admin'
+					  , NOW())
 	</insert>
 	
+	<!-- 글 조회 -->
+	<select id="selectBoard" resultType="BoardDto">
+		SELECT B.*
+			 , M.MMBR_NM
+			FROM hjtbd001 B 
+			JOIN hjtmb001 M ON B.WRT_MMBR_NO = M.MMBR_NO
+			WHERE BRD_NO = #{brdNo}
+	</select>
+	
+	<!-- 글 수정 -->
+	<update id="updateBoard">
+	    UPDATE hjtbd001
+	    SET BRD_TITLE = #{brdTitle}
+	      , BRD_CONTENT = #{brdContent}
+	      , UDTR_ID = #{udtrId}
+	      , UDTR_DT = NOW()
+	    WHERE BRD_NO = #{brdNo}
+	</update>
+	
+	<!-- 글 삭제 -->
+	<update id="deleteBoard">
+	    UPDATE hjtbd001
+	    SET BRD_DL_YN = 'Y',
+	        BRD_DL_DT = DATE_FORMAT(NOW(), '%d%m%y'),
+	        DL_MMBR_NO = #{dlMmbrNo},
+	        UDTR_DT = NOW()
+	    WHERE BRD_NO = #{brdNo}
+	</update>
+	
+	<!-- 조회수 증가 -->
+	<update id="updateBoardCnt" parameterType="int">
+		UPDATE hjtbd001 
+			SET 
+			   BRD_CNT = BRD_CNT + 1
+			WHERE BRD_NO = #{brdNo} 
+	</update>
 	
 </mapper>

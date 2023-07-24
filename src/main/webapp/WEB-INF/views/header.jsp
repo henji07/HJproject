@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -17,16 +16,16 @@
       <meta name="description" content="">
       <meta name="author" content="">
       <!-- bootstrap css -->
-      <link rel="stylesheet" type="text/css" href="resource/css/bootstrap.min.css">
+      <link rel="stylesheet" type="text/css" href="/resource/css/bootstrap.min.css">
       <!-- style css -->
-      <link rel="stylesheet" type="text/css" href="resource/css/style-profile.css">
+      <link rel="stylesheet" type="text/css" href="/resource/css/style-profile.css">
       <!-- Responsive-->
-      <link rel="stylesheet" href="resource/css/responsive.css">
+      <link rel="stylesheet" href="/resource/css/responsive.css">
       <!-- font css -->
       <link rel="preconnect" href="https://fonts.gstatic.com">
 	  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">  
       <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="resource/css/jquery.mCustomScrollbar.min.css">
+      <link rel="stylesheet" href="/resource/css/jquery.mCustomScrollbar.min.css">
       <!-- Tweaks for older IEs-->
       <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
 </head>
@@ -35,17 +34,17 @@
       <div class="header_section">
          <div class="container-fluid">
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
-               <a class="navbar-brand"href="/main"><img style="width: 120px; height: 50px;" src="/resource/img/qmanlogo2.png"></a>
+               <a class="navbar-brand"href="/"><img style="width: 120px; height: 50px;" src="/resource/img/qmanlogo2.png"></a>
                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                <span class="navbar-toggler-icon"></span>
                </button>
                <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav ml-auto">
                      <li class="nav-item active">
-                        <a class="nav-link" href="/main">홈</a>
+                        <a class="nav-link" href="/">홈</a>
                      </li>
                      <li class="nav-item">
-                        <a style="font-weight: bold;" class="nav-link" href="/about-qman">구만에 대하여</a>
+                        <a class="nav-link" href="/about-qman">구만에 대하여</a>
                      </li>
                      <li class="nav-item">
                         <a class="nav-link" href="/perform-qman">구만 일정</a>
@@ -57,7 +56,14 @@
                   <form class="form-inline my-2 my-lg-0">
                      <div class="login_bt">
                         <ul>
-                           <li><a href="#"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Login</a></li>
+                           <c:choose>
+				                <c:when test="${empty sessionScope.member}">
+				                    <li><a href="/login"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Login</a></li>
+				                </c:when>
+				                <c:otherwise>
+				                    <li><i class="fa fa-user" aria-hidden="true"></i>${sessionScope.member.memberInfo.mmbrNm}<a href="/logout"><span class="user_icon"><i class="fa fa-user" aria-hidden="true"></i></span>Logout</a></li>
+				                </c:otherwise>
+				            </c:choose>
                         </ul>
                      </div> 
                   </form>
@@ -66,5 +72,3 @@
          </div>   
       </div>
       <!-- header section end -->
-</body>
-</html>

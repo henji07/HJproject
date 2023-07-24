@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.spring.boot.service.dao.MemberMapper">
+
+
+	<!-- 회원 가입 -->
+	<insert id="joinMember">
+		INSERT INTO hjtmb001 (
+				MMBR_NO
+			  , MMBR_ID
+			  , MMBR_PW
+			  , MMBR_NUM
+			  , MMBR_NM
+			  , MMBR_JOIN_DT
+			  , SCD_YN
+			  , ADM_YN
+			  , REGR_ID
+			  , REGR_DT
+			  , UDTR_ID
+			  , UDTR_DT
+			  )
+		VALUES (0, #{mmbrId},#{mmbrPw}, #{mmbrNum}, #{mmbrNm}, DATE_FORMAT(NOW(), '%d%m%y'), 'N', 'N','admin', NOW(), 'admin', NOW())
+	</insert>
+	
+	<!-- 로그인 -->
+	<select id="login" resultType="MemberDto">
+		SELECT MMBR_NO
+			  , MMBR_ID
+			  , MMBR_PW
+			  , MMBR_NUM
+			  , MMBR_NM
+			  , MMBR_JOIN_DT
+			FROM hjtmb001
+			WHERE MMBR_ID = #{mmbrId}
+			  AND MMBR_PW = #{mmbrPw}
+	</select>
+	
+	<!-- 로그인할 때 회원 정보 가져오기 -->
+	<select id="getMemberInfo" resultType="MemberDto">
+		SELECT *
+			FROM hjtmb001
+			WHERE MMBR_ID = #{mmbrId} AND MMBR_PW = #{mmbrPw}
+	</select>
+
+	<!-- 아이디 존재 유무 체크 -->
+	<select id="idCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+			FROM hjtmb001
+			WHERE MMBR_ID = #{mmbrId}
+	</select>
+	
+	<!-- 닉네임 존재 유무 체크 -->
+	<select id="nmCheck" parameterType="String" resultType="int">
+		SELECT COUNT(*)
+			FROM hjtmb001
+			WHERE MMBR_NM = #{mmbrNm}
+	</select>
+</mapper>

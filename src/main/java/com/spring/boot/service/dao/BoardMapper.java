@@ -13,5 +13,13 @@ public interface BoardMapper {
 	public List<BoardDto> selectListPageBoardSearch();
 
 	public void insertBoard(BoardVo vo);
+	
+	public BoardDto selectBoard(int brdNo); 
+	
+	public int updateBoard(BoardVo vo);
+	
+	public void updateBoardCnt(int brdNo);
+
+	public int deleteBoard(BoardDto dto);
 
 }

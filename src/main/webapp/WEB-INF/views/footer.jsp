@@ -1,27 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-
-	<!-- bootstrap css -->
-	<link rel="stylesheet" type="text/css" href="resource/css/bootstrap.min.css">
-	<!-- style css -->
-	<link rel="stylesheet" type="text/css" href="resource/css/style-profile.css">
-	<!-- Responsive-->
-	<link rel="stylesheet" href="resource/css/responsive.css">
-	<!-- font css -->
-	<link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">  
-	<!-- Scrollbar Custom CSS -->
-	<link rel="stylesheet" href="resource/css/jquery.mCustomScrollbar.min.css">
-	<!-- Tweaks for older IEs-->
-	<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-	
-</head>
-<body>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 	<footer>
 		  <!-- copyright section start -->
 	      <div class="copyright_section">
@@ -44,6 +22,17 @@
 	      </div>
 	      <!-- copyright section end -->
 	</footer>
+	<!-- Javascript files-->
+      <script src="/resource/js/jquery.min.js"></script>
+      <script src="/resource/js/popper.min.js"></script>
+      <script src="/resource/js/bootstrap.bundle.min.js"></script>
+      <script src="/resource/js/jquery-3.0.0.min.js"></script>
+      <script src="/resource/js/plugin.js"></script>
+      <!-- sidebar -->
+      <script src="/resource/js/jquery.mCustomScrollbar.concat.min.js"></script>
+      <script src="/resource/js/custom.js"></script>
+     
+	  <script type="text/javascript" src="/resource/js/nthb-functions.js"></script>
 </body>
 </html>
 

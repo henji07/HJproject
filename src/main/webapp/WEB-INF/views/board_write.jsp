@@ -1,20 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>자유게시판</title>
-<link href="/resource/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link href="/resource/vendor/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.css" rel="stylesheet">
-
-
-</head>
-<body>
-
 	<!-- header section start -->
 	<jsp:include page="./header.jsp"></jsp:include>
 	<!-- header section end -->    
@@ -25,7 +10,7 @@
 				<div class="container">
 					<div class="row mt-5">
 						<div class="col-12 hstack gap-3">
-							<h3>자유게시판</h3><div class="vr"></div><h5>새글작성</h5>
+							<h3>구만에게</h3><div class="vr"></div><h5>새글작성</h5>
 						</div>
 					</div>
 				</div>
@@ -91,81 +76,32 @@
 		</div>
 		
 	  <!-- copyright section start -->
-	  <jsp:include page="./footer.jsp"></jsp:include>
-      <!-- copyright section end -->
-	
-	<script type="text/javascript" src="/resource/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript" src="/resource/vendor/jquery/jquery.min.js"></script>
-    <script type="text/javascript" src="/resource/js/nthb-functions.js"></script>
-    
-    <!-- Summernote Lite JS -->
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.js"></script>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		
-      	  $('#brdContent').summernote({
-      	    height: 300,                 // 높이 설정
-      	    minHeight: null,             // 최소 높이
-      	    maxHeight: null,             // 최대 높이
-      	    focus: true,                  // 포커스 설정
-      	    lang: 'ko-KR',                // 언어 설정
-     	    	toolbar: [
-		       			    // [groupName, [list of button]]
-		       			    ['fontname', ['fontname']],
-		       			    ['fontsize', ['fontsize']],
-		       			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-		       			    ['color', ['forecolor','color']],
-		       			    ['table', ['table']],
-		       			    ['para', ['ul', 'ol', 'paragraph']],
-		       			    ['height', ['height']],
-		       			    ['insert',['picture','link','video']],
-		       			    ['view', ['fullscreen', 'help']]
-		       			  ],
-     			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-     			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-     			placeholder: '최대 2048자까지 쓸 수 있습니다',	//placeholder 설정
-				callbacks: {	//여기 부분이 이미지를 첨부하는 부분
-					onImageUpload : function(files) {
-						uploadSummernoteImageFile(files[0],this);
-					},
-					onPaste: function (e) {
-						var clipboardData = e.originalEvent.clipboardData;
-						if (clipboardData && clipboardData.items && clipboardData.items.length) {
-							var item = clipboardData.items[0];
-							if (item.kind === 'file' && item.type.indexOf('image/') !== -1) {
-								e.preventDefault();
-							}
-						}
-					}
-				}
-      	  });
-		
+	  <jsp:include page="footer.jsp"></jsp:include>
+      <!-- copyright section end -->	
+      
+      <script type="text/javascript">
 		$("#btnRegist").click(function() {
 			rgtNoticeProc();
 		});
-	});
 		
-	function rgtNoticeProc(){
+		function rgtNoticeProc(){
+				
+			var obj = $("#inputForm").serializeObject();
 			
-		var obj = $("#inputForm").serializeObject();
-		obj.brdContent = $('#brdContent').summernote('code');
-		
-		console.log(obj);
-		
-		$.ajax({
-			type : "POST",
-			url : "<c:url value='/board/writeProc'/>",
-			dataType : "json",
-			data : JSON.stringify(obj),
-			contentType : 'application/json'
-		})
-		.done(function(data) {
-			location.href = "<c:url value='/board/list'/>";
-		})
-		.fail(function(data, textStatus, errorThrown) {
-
-		});
-	}
+			console.log(obj);
+			
+			$.ajax({
+				type : "POST",
+				url : "/board/write",
+				dataType : "json",
+				data : JSON.stringify(obj),
+				contentType : 'application/json'
+			})
+			.done(function(data) {
+				location.href = "/board/list";
+			})
+			.fail(function(data, textStatus, errorThrown) {
+	
+			});
+		}
 	</script>
-</body>
-</html>

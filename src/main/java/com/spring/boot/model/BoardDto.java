@@ -54,5 +54,8 @@ public class BoardDto {
 	/** 수정 일자 */
 	private String udtrDt;
 	
+	/** 닉네임 */
+	private String mmbrNm;
+	
 
 }

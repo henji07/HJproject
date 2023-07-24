@@ -1,35 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-   <head>
-      <!-- basic -->
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- mobile metas -->
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-      <!-- site metas -->
-      <title>구만이네</title>
-      <meta name="keywords" content="">
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <!-- bootstrap css -->
-      <link rel="stylesheet" type="text/css" href="/resource/css/bootstrap.min.css">
-      <!-- style css -->
-      <link rel="stylesheet" type="text/css" href="/resource/css/style-profile.css">
-      <!-- Responsive-->
-      <link rel="stylesheet" href="/resource/css/responsive.css">
-      <!-- font css -->
-      <link rel="preconnect" href="https://fonts.gstatic.com">
-	  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">  
-      <!-- Scrollbar Custom CSS -->
-      <link rel="stylesheet" href="/resource/css/jquery.mCustomScrollbar.min.css">
-      <!-- Tweaks for older IEs-->
-      <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
-   </head>
-   
-   <body>
+<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
       <!-- header section start -->
       <jsp:include page="./header.jsp"></jsp:include>
       <!-- header section end -->
@@ -154,18 +124,6 @@
 	</div>
 	<!-- album section end -->
           
-	  <!-- copyright section start -->
-	  <jsp:include page="./footer.jsp"></jsp:include>
-      <!-- copyright section end -->
-      
-      <!-- Javascript files-->     
-      <script src="/resource/js/jquery.min.js"></script>
-      <script src="/resource/js/popper.min.js"></script>
-      <script src="/resource/js/bootstrap.bundle.min.js"></script>
-      <script src="/resource/js/jquery-3.0.0.min.js"></script>
-      <script src="/resource/js/plugin.js"></script>
-      <!-- sidebar -->
-      <script src="/resource/js/jquery.mCustomScrollbar.concat.min.js"></script>
-      <script src="/resource/js/custom.js"></script>
-   </body>
-</html>
+	<!-- copyright section start -->
+	<jsp:include page="./footer.jsp"></jsp:include>
+	<!-- copyright section end -->
